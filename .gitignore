@@ -1,0 +1,34 @@
+# Python
+__pycache__/
+*.py[cod]
+
+# Virtual environment
+# Virtual environment
+venv/
+.venv/
+env/
+face-mask-venv/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# VS Code
+.vscode/
+
+# PyCharm
+.idea/
+
+# Operating system
+.DS_Store
+Thumbs.db
+
+# Dataset
+maskdata/
+dataset/
+data/
+
+# Environment variables
+.env
+
+# Logs
+*.log

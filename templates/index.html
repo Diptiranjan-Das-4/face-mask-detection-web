@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>FaceMask AI | Face Mask Detection</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<!-- ================= NAVBAR ================= -->
+
+<header class="navbar">
+
+    <div class="nav-container">
+
+        <a href="#home" class="logo">
+            <span class="logo-icon">🛡</span>
+            <span>FaceMask<span class="logo-highlight">AI</span></span>
+        </a>
+
+        <nav class="nav-links">
+
+            <a href="#home" class="nav-link active">
+                Home
+            </a>
+
+            <a href="#detection" class="nav-link">
+                Detection
+            </a>
+
+            <a href="#about" class="nav-link">
+                About
+            </a>
+
+        </nav>
+
+        <a href="#detection" class="nav-button">
+            Try Detection
+        </a>
+
+    </div>
+
+</header>
+
+
+<!-- ================= HOME ================= -->
+
+<section id="home" class="hero">
+
+    <div class="hero-container">
+
+        <div class="hero-content">
+
+            <div class="badge">
+                <span class="pulse"></span>
+                AI-POWERED DETECTION
+            </div>
+
+            <h1>
+                Smart Face Mask
+                Detection
+            </h1>
+
+            <p>
+                Detect whether a person is wearing a face mask
+                using real-time computer vision and deep learning.
+            </p>
+
+            <div class="hero-buttons">
+
+                <a href="#detection" class="primary-button">
+                    Start Detection
+                    <span>→</span>
+                </a>
+
+                <a href="#about" class="secondary-button">
+                    Learn More
+                </a>
+
+            </div>
+
+            <div class="hero-features">
+
+                <div class="hero-feature">
+                    <span>✓</span>
+                    Real-time Detection
+                </div>
+
+                <div class="hero-feature">
+                    <span>✓</span>
+                    CNN Model
+                </div>
+
+                <div class="hero-feature">
+                    <span>✓</span>
+                    Browser Camera
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="hero-visual">
+
+            <div class="ai-card">
+
+                <div class="ai-card-top">
+                    <span class="live-dot"></span>
+                    LIVE AI SYSTEM
+                </div>
+
+                <div class="face-frame">
+
+                    <div class="scan-line"></div>
+
+                    <div class="face-placeholder">
+                        <div class="face-head"></div>
+                        <div class="face-body"></div>
+                    </div>
+
+                    <div class="corner top-left"></div>
+                    <div class="corner top-right"></div>
+                    <div class="corner bottom-left"></div>
+                    <div class="corner bottom-right"></div>
+
+                    <div class="detection-label">
+                        <span>✓</span>
+                        MASK DETECTED
+                    </div>
+
+                </div>
+
+                <div class="ai-card-footer">
+
+                    <div>
+                        <small>CONFIDENCE</small>
+                        <strong>98.4%</strong>
+                    </div>
+
+                    <div>
+                        <small>STATUS</small>
+                        <strong class="status-green">ACTIVE</strong>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= STATS ================= -->
+
+<section class="stats-section">
+
+    <div class="stats-container">
+
+        <div class="stat">
+            <div class="stat-icon">⚡</div>
+            <div>
+                <strong>Real-Time</strong>
+                <span>Detection</span>
+            </div>
+        </div>
+
+        <div class="stat">
+            <div class="stat-icon">🧠</div>
+            <div>
+                <strong>CNN</strong>
+                <span>Deep Learning</span>
+            </div>
+        </div>
+
+        <div class="stat">
+            <div class="stat-icon">👁</div>
+            <div>
+                <strong>OpenCV</strong>
+                <span>Computer Vision</span>
+            </div>
+        </div>
+
+        <div class="stat">
+            <div class="stat-icon">📷</div>
+            <div>
+                <strong>Webcam</strong>
+                <span>Live Camera</span>
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= DETECTION ================= -->
+
+<section id="detection" class="detection-section">
+
+    <div class="section-container">
+
+        <div class="section-heading">
+
+            <div class="section-tag">
+                LIVE DETECTION
+            </div>
+
+            <h2>
+                Detect Face Masks
+                Instantly
+            </h2>
+
+            <p>
+                Allow camera access and let the AI analyze faces
+                in real time.
+            </p>
+
+        </div>
+
+
+        <div class="detector-card">
+
+            <div class="detector-header">
+
+                <div>
+                    <h3>Face Mask Detector</h3>
+
+                    <p>
+                        Real-time webcam analysis
+                    </p>
+                </div>
+
+                <div class="connection-status" id="status">
+
+                    <span class="status-dot"></span>
+
+                    Ready
+
+                </div>
+
+            </div>
+
+
+            <div class="camera-area">
+
+                <div class="video-wrapper">
+
+                    <video
+                        id="webcam"
+                        autoplay
+                        playsinline>
+                    </video>
+
+                    <img
+                        id="result"
+                        alt="Detection result">
+
+                    <canvas id="canvas"></canvas>
+
+                    <div
+                        id="overlay"
+                        class="camera-overlay">
+
+                        <div class="camera-icon">
+                            📷
+                        </div>
+
+                        <p>
+                            Click "Start Camera" to begin
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="detector-controls">
+
+                <button
+                    id="startBtn"
+                    class="primary-button">
+
+                    <span>▶</span>
+                    Start Camera
+
+                </button>
+
+                <button
+                    id="stopBtn"
+                    class="secondary-button"
+                    disabled>
+
+                    <span>■</span>
+                    Stop Camera
+
+                </button>
+
+            </div>
+
+
+            <div class="detection-info">
+
+                <div class="info-box">
+
+                    <span class="info-icon">👤</span>
+
+                    <div>
+                        <strong>Face Detection</strong>
+                        <p>Haar Cascade</p>
+                    </div>
+
+                </div>
+
+                <div class="info-box">
+
+                    <span class="info-icon">🧠</span>
+
+                    <div>
+                        <strong>AI Model</strong>
+                        <p>CNN / TensorFlow</p>
+                    </div>
+
+                </div>
+
+                <div class="info-box">
+
+                    <span class="info-icon">📐</span>
+
+                    <div>
+                        <strong>Input Size</strong>
+                        <p>250 × 250 pixels</p>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= HOW IT WORKS ================= -->
+
+<section class="process-section">
+
+    <div class="section-container">
+
+        <div class="section-heading">
+
+            <div class="section-tag">
+                HOW IT WORKS
+            </div>
+
+            <h2>
+                From Camera to
+                Prediction
+            </h2>
+
+        </div>
+
+
+        <div class="process-grid">
+
+            <div class="process-card">
+
+                <div class="process-number">01</div>
+
+                <div class="process-icon">📷</div>
+
+                <h3>Capture</h3>
+
+                <p>
+                    The browser captures frames from your webcam.
+                </p>
+
+            </div>
+
+
+            <div class="process-card">
+
+                <div class="process-number">02</div>
+
+                <div class="process-icon">👤</div>
+
+                <h3>Detect Face</h3>
+
+                <p>
+                    OpenCV Haar Cascade identifies faces in the frame.
+                </p>
+
+            </div>
+
+
+            <div class="process-card">
+
+                <div class="process-number">03</div>
+
+                <div class="process-icon">🧠</div>
+
+                <h3>Analyze</h3>
+
+                <p>
+                    The CNN model analyzes the detected face.
+                </p>
+
+            </div>
+
+
+            <div class="process-card">
+
+                <div class="process-number">04</div>
+
+                <div class="process-icon">✓</div>
+
+                <h3>Predict</h3>
+
+                <p>
+                    The system displays Mask or No Mask with confidence.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= ABOUT ================= -->
+
+<section id="about" class="about-section">
+
+    <div class="section-container">
+
+        <div class="about-grid">
+
+            <div class="about-content">
+
+                <div class="section-tag">
+                    ABOUT THE PROJECT
+                </div>
+
+                <h2>
+                    Computer Vision
+                    <span>Made Simple</span>
+                </h2>
+
+                <p>
+                    FaceMask AI is a browser-based face mask detection
+                    application that combines computer vision with
+                    deep learning.
+                </p>
+
+                <p>
+                    The system detects faces using OpenCV's Haar Cascade
+                    classifier and then sends the detected face through
+                    a trained TensorFlow CNN model to classify whether
+                    a mask is present.
+                </p>
+
+                <div class="technology-list">
+
+                    <div class="technology">
+                        <span>🐍</span>
+                        Python
+                    </div>
+
+                    <div class="technology">
+                        <span>🌐</span>
+                        Flask
+                    </div>
+
+                    <div class="technology">
+                        <span>👁</span>
+                        OpenCV
+                    </div>
+
+                    <div class="technology">
+                        <span>🧠</span>
+                        TensorFlow
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="about-card">
+
+                <div class="about-card-icon">
+                    🛡
+                </div>
+
+                <h3>
+                    AI Detection Pipeline
+                </h3>
+
+                <div class="pipeline">
+
+                    <div class="pipeline-item">
+                        <span>01</span>
+                        Webcam Frame
+                    </div>
+
+                    <div class="pipeline-line"></div>
+
+                    <div class="pipeline-item">
+                        <span>02</span>
+                        Face Detection
+                    </div>
+
+                    <div class="pipeline-line"></div>
+
+                    <div class="pipeline-item">
+                        <span>03</span>
+                        CNN Prediction
+                    </div>
+
+                    <div class="pipeline-line"></div>
+
+                    <div class="pipeline-item">
+                        <span>04</span>
+                        Mask / No Mask
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+    <div class="footer-container">
+
+        <div class="footer-logo">
+            🛡 FaceMask<span>AI</span>
+        </div>
+
+        <p>
+            AI-powered face mask detection using computer vision.
+        </p>
+
+        <div class="footer-links">
+
+            <a href="#home">Home</a>
+            <a href="#detection">Detection</a>
+            <a href="#about">About</a>
+
+        </div>
+
+        <div class="footer-bottom">
+            © 2026 FaceMask AI · Built with Python, Flask, OpenCV & TensorFlow
+        </div>
+
+    </div>
+
+</footer>
+
+
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+</body>
+</html>
